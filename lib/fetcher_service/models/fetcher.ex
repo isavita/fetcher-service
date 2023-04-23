@@ -10,10 +10,14 @@ defmodule FetcherService.Models.Fetcher do
   end
 
   defp find_assets(doc) do
-    Floki.find(doc, "img[src]") |> Floki.attribute("src") |> Enum.reject(&(&1 == "" || &1 == nil))
+    Floki.find(doc, "img[src]") |> Floki.attribute("src") |> remove_empty_links()
   end
 
   defp find_links(doc) do
-    Floki.find(doc, "a[href]") |> Floki.attribute("href") |> Enum.reject(&(&1 == "" || &1 == nil))
+    Floki.find(doc, "a[href]") |> Floki.attribute("href") |> remove_empty_links()
+  end
+
+  defp remove_empty_links(links) do
+    Enum.reject(links, &(&1 == "" || &1 == nil))
   end
 end

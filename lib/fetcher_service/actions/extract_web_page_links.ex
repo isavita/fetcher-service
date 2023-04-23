@@ -2,10 +2,18 @@ defmodule FetcherService.Actions.ExtractWebPageLinks do
   alias FetcherService.Models.Fetcher
 
   def call(url) do
-    with {:ok, _uri} <- URI.new(url),
+    with :ok <- valide_url(url),
          {:ok, body} <- http_client().get_web_page(url),
-         %Fetcher{} = fetcher <- Fetcher.parse_html(body) do
+         {:ok, %Fetcher{} = fetcher} <- Fetcher.parse_html(body) do
       {:ok, fetcher}
+    end
+  end
+
+  defp valide_url(url) do
+    case URI.parse(url) do
+      %URI{scheme: "http", host: _host} -> :ok
+      %URI{scheme: "https", host: _host} -> :ok
+      _ -> {:error, :invalid_url}
     end
   end
 
