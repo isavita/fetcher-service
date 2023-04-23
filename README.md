@@ -11,7 +11,7 @@ The project consists of three main files:
 # How to Run
 - Install Elixir and its dependencies if you haven't already.
 - Clone the repository.
-- Navigate to the project directory and run mix deps.get to fetch the dependencies.
+- Navigate to the project directory and run `mix deps.get` to fetch the dependencies.
 - Run the tests with `mix test`.
 - Run the application with `iex -S mix` and then the following code to extract the image and anchor tag URLs from a web page:
 ```elixir
@@ -21,5 +21,5 @@ FetcherService.Actions.ExtractWebPageLinks.call(url)
 
 # Shortcomings
 - **Code Organization:** The current project structure is simple, but as the project grows, it might be beneficial to further organize the code into separate contexts.
-- **Limited Extraction Scope:** The current implementation only extracts URLs from **<img>** and **<a>** tags. It does not handle other tags that might contain URLs, such as **<link>**, **<script>**, or **<iframe>**. Expanding the extraction scope to include these additional tags would provide a more comprehensive list of assets and links on a web page.
+- **Limited Extraction Scope:** The current implementation only extracts URLs from `<img>` and `<a>` tags. It does not handle other tags that might contain URLs, such as `<link>`, `<script>`, or `<iframe>`. Expanding the extraction scope to include these additional tags would provide a more comprehensive list of assets and links on a web page.
 - **Error Handling:** The current implementation does not handle all possible errors that may occur during the process, such as network errors, malformed HTML, or timeouts.
